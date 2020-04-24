@@ -15,21 +15,18 @@ export default {
     },
     remove_item(state, payload) {
       state.table_data.splice(state.table_data.indexOf(payload), 1);
-      let index = state.selected_items.rows.indexOf(payload);
       state.selected_items.rows.includes(payload) && state.selected_items.rows.splice(index, 1);
     },
-    select_item(state, { type, item }) {
-      let items = state.selected_items[type];
-      let index = items.indexOf(item);
-      items.includes(item) ? items.splice(index, 1) : items.push(item);
+    select_item(state, payload) {
+      let items = state.selected_items;
+      let index = items.indexOf(payload);
+      items.includes(payload) ? items.splice(index, 1) : items.push(payload);
     },
     select_items(state, { type, items }) {
-      let items_slc = state.selected_items[type];
       items.forEach(item => {
-        let index = items_slc.indexOf(item);
-        items_slc.includes(item) ? items_slc[index] = item : items_slc.push(item);
+        let index = state.selected_items[type].indexOf(item);
+        state.selected_items[type].includes(item) ? items[index] = item : items.push(item);
       })
-
     }
   },
   actions: {
@@ -50,10 +47,7 @@ export default {
         console.log(e.error || e);
       });
     },
-    select_item({ commit }, payload) {
-      let type = Object.keys(payload)[0];
-      let items = payload[type];
-
+    select_item({ commit }, { type, items }) {
       if (items.length > 1) return commit('select_items', { type, items });
       items.forEach(item => {
         commit('select_item', { item, type })
@@ -65,3 +59,9 @@ export default {
     selected_items: s => s.selected_items
   }
 }
+
+// select_items(state, payload) {
+//   let items = state.selected_items;
+//   let index = items.indexOf(payload);
+//   items.includes(payload) ? items[index] = payload : items.push(payload);
+// }

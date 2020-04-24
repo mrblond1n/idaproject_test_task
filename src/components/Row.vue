@@ -1,7 +1,7 @@
 <template>
   <tr @click="select_row">
     <td>
-      <checkbox :is_checked="selected_items.includes(item)" />
+      <checkbox :is_checked="selected_items.rows.includes(item)" />
     </td>
     <td v-for="header in headers" :key="header.name">{{item[header.name]}}</td>
     <td>
@@ -43,7 +43,7 @@ export default {
   methods: {
     ...mapActions(["remove_item", "select_item"]),
     select_row() {
-      this.select_item(Array(this.item));
+      this.select_item({ rows: Array(this.item) });
     },
     remove(item) {
       this.remove_item(item);

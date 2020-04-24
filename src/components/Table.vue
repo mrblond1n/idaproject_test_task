@@ -17,14 +17,15 @@
     <!-- НА УДАЛЕНИЕ  -->
     <!-- selected items
     <div
-      v-for="item in selected_items"
+      v-for="item in selected_items.rows"
       :key="item.id"
       style="margin-top: 20px"
     >------- {{item.product}}</div>
     <div style="position: relative">
+      {{dialog}}
       <button
         class="btn"
-        :disabled="!selected_items.length"
+        :disabled="!selected_items.rows.length"
         @click.stop="dialog = !dialog"
       >remove all</button>
       <template v-if="dialog">
@@ -109,7 +110,7 @@ export default {
     all_rows_selected() {
       let count = 0;
       this.current_data.forEach(item => {
-        this.selected_items.includes(item) ? (count += 1) : (count -= 1);
+        this.selected_items.rows.includes(item) ? (count += 1) : (count -= 1);
       });
       return count === this.rows_per_page;
     }
@@ -117,7 +118,7 @@ export default {
   methods: {
     ...mapActions(["remove_item", "select_item"]),
     remove() {
-      this.selected_items.forEach(item => {
+      this.selected_items.rows.forEach(item => {
         this.remove_item(item);
       });
       this.dialog = false;
@@ -128,10 +129,10 @@ export default {
     select_all() {
       if (this.all_rows_selected) {
         //all select
-        this.current_data.forEach(el => this.select_item(Array(el)));
+        this.current_data.forEach(el => this.select_item({ rows: Array(el) }));
       } else {
         // all selected reset!
-        this.select_item(this.current_data);
+        this.select_item({ rows: this.current_data });
       }
     }
   }
