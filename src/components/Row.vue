@@ -1,11 +1,7 @@
 <template>
   <tr @click="select_row">
-    <checkbox />
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
-    <td>test</td>
+    <checkbox :is_checked="row_is_select" />
+    <td v-for="data in item" :key="data">{{data}}</td>
     <td>
       <button class="btn" v-if="!dialog" @click="dialog = !dialog">delete</button>
       <div v-else>
@@ -23,6 +19,12 @@ export default {
     checkbox,
     appDialog
   },
+  props: {
+    item: {
+      type: Object,
+      default: () => ({ product: "test", iron: "123", calories: "321" })
+    }
+  },
   data() {
     return {
       dialog: false,
@@ -31,7 +33,8 @@ export default {
   },
   methods: {
     select_row() {
-      console.log("select_row!");
+      this.row_is_select = !this.row_is_select;
+      this.$emit("add_select_row", this.item);
     }
   }
 };
