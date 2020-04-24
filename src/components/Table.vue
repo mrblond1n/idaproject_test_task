@@ -20,12 +20,26 @@
           <th class="table__item">
             <app-checkbox :select="select_all" :is_checked="all_rows_selected" />
           </th>
-          <th class="table__item" v-for="item in selected_items.cols" :key="item.name">{{item.text}}</th>
+          <!-- <th class="table__item" v-if="sort_item.item" @click="sort_data">{{sort_item.item.text}}</th> -->
+          <sort-item v-if="sort_item.item" :sort_item="sort_item" />
+          <template v-for="item in selected_items.cols">
+            <th
+              class="table__item"
+              v-if="sort_item.item.name != item.name"
+              :key="item.name"
+            >{{item.text}}</th>
+          </template>
           <th class="table__item"></th>
         </tr>
       </thead>
       <tbody class="table__body">
-        <row v-for="item in current_data" :item="item" :key="item.id" :headers="headers" />
+        <row
+          v-for="item in current_data"
+          :item="item"
+          :key="item.id"
+          :headers="headers"
+          :sort_item="sort_item"
+        />
       </tbody>
     </table>
   </div>
@@ -38,7 +52,8 @@ import selectButton from "@/components/Select";
 import appCheckbox from "@/components/Checkbox";
 import appRemove from "@/components/Remove";
 import appPagination from "@/components/Pagination";
-import sortButton from "./Sort_item";
+import sortButton from "./Sort_button";
+import sortItem from "./Sort_item";
 export default {
   components: {
     row,
@@ -46,7 +61,8 @@ export default {
     appRemove,
     appCheckbox,
     appPagination,
-    sortButton
+    sortButton,
+    sortItem
   },
   data() {
     return {
@@ -76,7 +92,8 @@ export default {
           name: "iron"
         }
       ],
-      dialog: false
+      dialog: false,
+      sort_type: 0
     };
   },
   computed: {
@@ -114,7 +131,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["select_item"]),
+    ...mapActions(["select_item", "set_sort_item"]),
     select_all() {
       if (this.all_rows_selected) {
         //all select

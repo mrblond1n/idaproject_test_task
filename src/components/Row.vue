@@ -7,11 +7,15 @@
     <td class="table__item">
       <checkbox :is_checked="selected_items.rows.includes(item)" />
     </td>
-    <td
-      class="table__item"
-      v-for="header in selected_items.cols"
-      :key="header.name"
-    >{{item[header.name]}}</td>
+    <td class="table__item" v-if="sort_item.item">{{item[sort_item.item.name]}}</td>
+    <template v-for="header in selected_items.cols">
+      <td
+        class="table__item"
+        :key="header.name"
+        v-if="header.name != sort_item.item.name"
+      >{{item[header.name]}}</td>
+    </template>
+
     <td class="table__item">
       <button class="btn" @click.stop="dialog = !dialog">delete</button>
       <template v-if="dialog">
@@ -37,6 +41,10 @@ export default {
     },
     headers: {
       type: Array,
+      default: () => {}
+    },
+    sort_item: {
+      type: Object,
       default: () => {}
     }
   },

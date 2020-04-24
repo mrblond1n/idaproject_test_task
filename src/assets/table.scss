@@ -22,7 +22,12 @@
 .table__item {
 	text-align: left;
 }
-.table__item:first-child {
+.table__item.sort {
+	cursor: pointer;
+}
+
+.table__item:first-child,
+.table__item:last-child {
 	width: 1%;
 }
 
