@@ -1,0 +1,14 @@
+.table__control {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 0;
+}
+
+.table__control-item {
+	display: flex;
+	align-items: center;
+}
+
+.table__sort-item {
+	margin: 0 10px;
+}

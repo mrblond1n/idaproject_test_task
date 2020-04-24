@@ -46,9 +46,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.select {
-  position: relative;
-}
-</style>

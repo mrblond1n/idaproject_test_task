@@ -47,27 +47,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.options {
-  position: absolute;
-  background: white;
-  max-height: 240px;
-  z-index: 10;
-  top: 40px;
-  min-width: 100%;
-  border-radius: 4px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.16);
-  .btn {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border: none;
-    transition: 0.4s;
-  }
-  .btn:hover {
-    background: #cecece;
-  }
-}
-</style>

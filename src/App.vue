@@ -24,6 +24,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 200px 0;
+  font-size: 14px;
 }
 </style>

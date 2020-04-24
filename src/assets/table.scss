@@ -1,0 +1,45 @@
+table {
+	border-collapse: collapse;
+	position: relative;
+	width: 100%;
+}
+thead th {
+	padding: 1rem;
+}
+
+tr {
+	position: relative;
+	&:nth-child(odd) {
+		background: $odd-row-color;
+	}
+	&:nth-child(even) {
+		background: $even-row-color;
+	}
+}
+
+tbody tr:hover {
+	cursor: pointer;
+	transition: 0.2s;
+	background: $select-row-color;
+	td:nth-child(2) {
+		font-weight: bold;
+	}
+}
+
+td,
+th {
+	padding: 1rem;
+	max-width: 10rem;
+}
+
+tr.selected td:nth-child(2) {
+	font-weight: bold;
+	opacity: 0.8;
+}
+
+tr {
+	td:first-child,
+	th:first-child {
+		width: 1%;
+	}
+}

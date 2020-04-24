@@ -1,0 +1,30 @@
+.btn {
+	padding: 5px 10px;
+	transition: 0.4s;
+	border: 1px solid $border-active;
+	color: $active-color;
+	border-radius: 2px;
+	height: 32px;
+	margin: 0 10px;
+	cursor: pointer;
+	span {
+		color: $active-color;
+	}
+}
+
+.btn:disabled {
+	cursor: default;
+	border-color: $disable-color;
+	color: $disable-color;
+	span {
+		color: $disable-color;
+	}
+}
+
+.btn--active {
+	background: $active;
+	color: #fff;
+	span {
+		color: #fff;
+	}
+}
