@@ -49,9 +49,9 @@ export default {
 }
 .sort_1,
 .sort_2 {
-  color: green;
+  color: $active;
   span {
-    color: black;
+    color: $sort-color;
   }
 }
 </style>

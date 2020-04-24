@@ -6,7 +6,7 @@
     </div>
     <div class="card__action">
       <button class="btn" @click.stop="close">Cancel</button>
-      <button class="btn" @click.stop="remove">Confirm</button>
+      <button class="btn btn--active" @click.stop="remove">Confirm</button>
     </div>
   </div>
 </template>
@@ -28,13 +28,15 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener(
-      "click",
-      e => !e.target.closest(".card") && this.$emit("close_dialog")
-    );
+    document.addEventListener("click", e => {
+      !e.target.closest(".card") && this.$emit("close_dialog");
+    });
   }
 };
 </script>
 
 <style lang="scss" scoped>
+span {
+  font-weight: bold;
+}
 </style>

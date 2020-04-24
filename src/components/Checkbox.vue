@@ -30,7 +30,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 2px;
+  border-radius: 1px;
   cursor: pointer;
   svg {
     width: 10px;

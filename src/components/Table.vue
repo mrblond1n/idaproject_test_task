@@ -20,7 +20,6 @@
           <th class="table__item">
             <app-checkbox :select="select_all" :is_checked="all_rows_selected" />
           </th>
-          <!-- <th class="table__item" v-if="sort_item.item" @click="sort_data">{{sort_item.item.text}}</th> -->
           <sort-item v-if="sort_item.item" :sort_item="sort_item" />
           <template v-for="item in selected_items.cols">
             <th
