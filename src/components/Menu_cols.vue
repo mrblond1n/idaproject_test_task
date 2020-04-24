@@ -44,6 +44,11 @@ export default {
       }
       this.select_item({ cols: this.headers });
     }
+  },
+  mounted() {
+    document.addEventListener("click", e => {
+      !e.target.closest(".options") && this.$emit("close_menu");
+    });
   }
 };
 </script>

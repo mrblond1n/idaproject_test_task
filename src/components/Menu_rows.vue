@@ -27,10 +27,9 @@ export default {
     }
   },
   mounted() {
-    document.addEventListener(
-      "click",
-      e => !e.target.closest(".option") && this.$emit("close_menu")
-    );
+    document.addEventListener("click", e => {
+      !e.target.closest(".options") && this.$emit("close_menu");
+    });
   }
 };
 </script>
