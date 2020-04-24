@@ -1,11 +1,11 @@
 <template>
   <tr @click="select_row">
     <checkbox :is_checked="row_is_select" />
-    <td v-for="data in item" :key="data">{{data}}</td>
+    <td v-for="header in headers" :key="header.name">{{item[header.name]}}</td>
     <td>
-      <button class="btn" v-if="!dialog" @click="dialog = !dialog">delete</button>
+      <button class="btn" v-if="!dialog" @click.stop="dialog = !dialog">delete</button>
       <div v-else>
-        <app-dialog @close_dialog="() => {dialog = false}" />
+        <app-dialog @close_dialog="() => {dialog = false}" @remove_item="remove(item)" />
       </div>
     </td>
   </tr>
@@ -14,6 +14,7 @@
 <script>
 import checkbox from "./Checkbox";
 import appDialog from "./Dialog";
+import { mapActions } from "vuex";
 export default {
   components: {
     checkbox,
@@ -22,7 +23,11 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({ product: "test", iron: "123", calories: "321" })
+      default: () => {}
+    },
+    headers: {
+      type: Array,
+      default: () => {}
     }
   },
   data() {
@@ -32,9 +37,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["remove_item", "select_item"]),
     select_row() {
       this.row_is_select = !this.row_is_select;
-      this.$emit("add_select_row", this.item);
+      this.select_item(Array(this.item));
+    },
+    remove(item) {
+      this.remove_item(item);
     }
   }
 };

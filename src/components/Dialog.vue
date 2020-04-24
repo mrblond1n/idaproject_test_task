@@ -5,8 +5,8 @@
       <span>{{msg}}</span>
     </div>
     <div class="card__action">
-      <button class="btn" @click="close">Cancel</button>
-      <button class="btn" @click="close">Confirm</button>
+      <button class="btn" @click.stop="close">Cancel</button>
+      <button class="btn" @click.stop="remove">Confirm</button>
     </div>
   </div>
 </template>
@@ -22,6 +22,9 @@ export default {
   methods: {
     close() {
       this.$emit("close_dialog");
+    },
+    remove() {
+      this.$emit("remove_item");
     }
   }
 };
