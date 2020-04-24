@@ -3,10 +3,10 @@
     <checkbox :is_checked="row_is_select" />
     <td v-for="header in headers" :key="header.name">{{item[header.name]}}</td>
     <td>
-      <button class="btn" v-if="!dialog" @click.stop="dialog = !dialog">delete</button>
-      <div v-else>
+      <button class="btn" @click.stop="dialog = !dialog">delete</button>
+      <template v-if="dialog">
         <app-dialog @close_dialog="() => {dialog = false}" @remove_item="remove(item)" />
-      </div>
+      </template>
     </td>
   </tr>
 </template>
@@ -50,4 +50,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+tr {
+  position: relative;
+}
+td {
+  position: relative;
+  padding: 1rem;
+}
 </style>
