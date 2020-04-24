@@ -1,14 +1,17 @@
-.table__control {
+.panel {
 	display: flex;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	justify-content: center;
 	padding: 20px 0;
 }
 
-.table__control-item {
+.panel__item {
 	display: flex;
 	align-items: center;
-}
-
-.table__sort-item {
-	margin: 0 10px;
+	&:first-child .btn {
+		border-color: transparent;
+	}
+	& > div {
+		position: relative;
+	}
 }

@@ -1,10 +1,18 @@
 <template>
-  <tr @click="select_row" :class="selected_items.rows.includes(item) && 'selected'">
-    <td>
+  <tr
+    class="table__row"
+    @click="select_row"
+    :class="(selected_items.rows.includes(item) && 'selected')"
+  >
+    <td class="table__item">
       <checkbox :is_checked="selected_items.rows.includes(item)" />
     </td>
-    <td v-for="header in selected_items.cols" :key="header.name">{{item[header.name]}}</td>
-    <td>
+    <td
+      class="table__item"
+      v-for="header in selected_items.cols"
+      :key="header.name"
+    >{{item[header.name]}}</td>
+    <td class="table__item">
       <button class="btn" @click.stop="dialog = !dialog">delete</button>
       <template v-if="dialog">
         <app-dialog @close_dialog="() => {dialog = false}" @remove_item="remove(item)" />

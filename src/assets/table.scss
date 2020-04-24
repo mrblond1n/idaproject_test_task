@@ -1,13 +1,10 @@
-table {
+.table {
 	border-collapse: collapse;
 	position: relative;
 	width: 100%;
 }
-thead th {
-	padding: 1rem;
-}
 
-tr {
+.table__row {
 	position: relative;
 	&:nth-child(odd) {
 		background: $odd-row-color;
@@ -17,29 +14,25 @@ tr {
 	}
 }
 
-tbody tr:hover {
-	cursor: pointer;
-	transition: 0.2s;
-	background: $select-row-color;
-	td:nth-child(2) {
-		font-weight: bold;
-	}
-}
-
-td,
-th {
+.table__item {
 	padding: 1rem;
 	max-width: 10rem;
 }
 
-tr.selected td:nth-child(2) {
-	font-weight: bold;
-	opacity: 0.8;
+.table__item:first-child {
+	width: 1%;
 }
 
-tr {
-	td:first-child,
-	th:first-child {
-		width: 1%;
+.table__body .table__row:hover {
+	cursor: pointer;
+	transition: 0.2s;
+	background: $select-row-color;
+	.table__item:nth-child(2) {
+		font-weight: bold;
 	}
+}
+
+.table__row.selected .table__item:nth-child(2) {
+	font-weight: bold;
+	opacity: 0.8;
 }

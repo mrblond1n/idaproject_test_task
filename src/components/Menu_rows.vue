@@ -1,11 +1,11 @@
 <template>
   <div class="options">
-    <div
+    <button
       v-for="(item, i) in items"
       :key="i"
       class="btn"
       @click="change_count(item)"
-    >{{`${item} per page`}}</div>
+    >{{`${item} per page`}}</button>
   </div>
 </template>
 

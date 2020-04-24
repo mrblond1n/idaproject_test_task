@@ -1,30 +1,30 @@
 <template>
   <div>
-    <div class="table__control">
-      <div class="table__control-item">
+    <div class="panel">
+      <div class="panel__item">
         <p>Sorting by:</p>
         <template v-for="item in headers">
-          <button class="table__sort-item" :key="item.name">{{item.text}}</button>
+          <sort-button :key="item.name" :item="item" />
         </template>
       </div>
-      <div class="table__control-item">
+      <div class="panel__item">
         <app-remove />
         <select-button method="rows" />
         <app-pagination />
         <select-button method="cols" :headers="headers" />
       </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>
+    <table class="table">
+      <thead class="table__head">
+        <tr class="table__row">
+          <th class="table__item">
             <app-checkbox :select="select_all" :is_checked="all_rows_selected" />
           </th>
-          <th v-for="item in selected_items.cols" :key="item.name">{{item.text}}</th>
-          <th></th>
+          <th class="table__item" v-for="item in selected_items.cols" :key="item.name">{{item.text}}</th>
+          <th class="table__item"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table__body">
         <row v-for="item in current_data" :item="item" :key="item.id" :headers="headers" />
       </tbody>
     </table>
@@ -38,13 +38,15 @@ import selectButton from "@/components/Select";
 import appCheckbox from "@/components/Checkbox";
 import appRemove from "@/components/Remove";
 import appPagination from "@/components/Pagination";
+import sortButton from "./Sort_item";
 export default {
   components: {
     row,
     selectButton,
     appRemove,
     appCheckbox,
-    appPagination
+    appPagination,
+    sortButton
   },
   data() {
     return {
