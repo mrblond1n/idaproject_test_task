@@ -1,26 +1,21 @@
 <template>
   <div class="select">
-    <button class="btn" @click="menu = !menu">
+    <button class="btn" @click.stop="menu = !menu">
       <div>
-        {{method === 'count_rows' ? `${rows_per_page} per page` : `${selected_items.cols.length} columns selected`}}
+        {{method === 'rows' ? `${rows_per_page} per page` : `${selected_items.cols.length} columns selected`}}
         <span
           class="mdi mdi-16px mdi-chevron-down"
         ></span>
       </div>
     </button>
-    <div v-if="menu" class="card">
-      <div v-for="i in 5" :key="i">{{i}}</div>
-    </div>
-    <!-- <template v-if="method === 'count_rows' && menu">
-      <app-rows :items="exc_selected" />
+    <template v-if="method === 'rows' && menu">
+      <menu-rows @close_menu="menu = !menu" />
     </template>
-    <template v-else-if="method === 'count_columns' && menu">
-      <app-columns />
-    </template>-->
   </div>
 </template>
 
 <script>
+import menuRows from "./Menu_rows";
 import { mapGetters } from "vuex";
 export default {
   props: {
@@ -28,6 +23,9 @@ export default {
       type: String,
       default: "count_rows"
     }
+  },
+  components: {
+    menuRows
   },
   data() {
     return {

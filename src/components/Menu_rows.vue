@@ -25,6 +25,12 @@ export default {
         this.$emit("close_menu");
       });
     }
+  },
+  mounted() {
+    document.addEventListener(
+      "click",
+      e => !e.target.closest(".option") && this.$emit("close_menu")
+    );
   }
 };
 </script>

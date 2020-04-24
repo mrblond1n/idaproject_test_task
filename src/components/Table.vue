@@ -9,7 +9,7 @@
       </div>
       <div class="table__control-item">
         <app-remove />
-        <select-button />
+        <select-button method="rows" />
         <app-pagination />
         <select-button />
       </div>
