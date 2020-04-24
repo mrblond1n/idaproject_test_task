@@ -1,0 +1,35 @@
+$font: Source Sans Pro;
+$bg-color: #f2f2f2;
+$text-color: #282136;
+$header-text-color: #282136;
+
+$even-row-color: #f8f9fa;
+$odd-row-color: #ffffff;
+$select-row-color: rgba(0, 161, 30, 0.07);
+
+$error: rgb(211, 89, 89);
+$success: rgb(89, 211, 160);
+$info: #1867c0;
+$disabled: #c6cbd4;
+$activated: #5B5E77;
+
+$active: #00a11e;
+$usable: #d5dae0;
+
+
+$border-active: #d5dae0;
+$active-color: #5b5e77;
+$disable-color: #c6cbd4;
+$sort-color: #3d374a;
+
+
+
+
+.btn_alt {
+  background: transparent;
+  color: #3d374a;
+}
+
+.sort_by {
+  color: #3d374a;
+}
