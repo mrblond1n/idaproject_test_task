@@ -1,19 +1,32 @@
 <template>
-  <button
-    class="btn"
-    :class="{'btn--active': count_selected}"
-    :disabled="!count_selected"
-    @click="remove"
-  >
-    Delete
-    <span v-if="count_selected">({{count_selected}})</span>
-  </button>
+  <div>
+    <button
+      class="btn"
+      :class="{'btn--active': count_selected}"
+      :disabled="!count_selected"
+      @click.stop="dialog = !dialog"
+    >
+      Delete
+      <span v-if="count_selected">({{count_selected}})</span>
+    </button>
+    <template v-if="dialog">
+      <app-dialog msg="delete items" @close_dialog="() => {dialog = false}" @remove_item="remove" />
+    </template>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-
+import appDialog from "./Dialog";
 export default {
+  components: {
+    appDialog
+  },
+  data() {
+    return {
+      dialog: false
+    };
+  },
   computed: {
     ...mapGetters(["selected_items"]),
     count_selected() {
@@ -21,11 +34,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["remove_items", "select_item"]),
+    ...mapActions(["remove_item", "select_item"]),
     remove() {
-      this.remove_items(this.selected_items.rows).then(() => {
-        this.select_item({ rows: null });
+      this.selected_items.rows.forEach(item => {
+        this.remove_item(item);
       });
+      this.dialog = false;
     }
   }
 };

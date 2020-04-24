@@ -33,22 +33,7 @@
       v-for="item in selected_items.rows"
       :key="item.id"
       style="margin-top: 20px"
-    >------- {{item.product}}</div>
-    <div style="position: relative">
-      {{dialog}}
-      <button
-        class="btn"
-        :disabled="!selected_items.rows.length"
-        @click.stop="dialog = !dialog"
-      >remove all</button>
-      <template v-if="dialog">
-        <app-dialog
-          msg="delete items"
-          @close_dialog="() => {dialog = false}"
-          @remove_item="remove"
-        />
-      </template>
-    </div>-->
+    >------- {{item.product}}</div>-->
   </div>
 </template>
 
@@ -133,16 +118,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["remove_item", "select_item"]),
-    remove() {
-      this.selected_items.rows.forEach(item => {
-        this.remove_item(item);
-      });
-      this.dialog = false;
-    },
-    show_dialog() {
-      this.dialog = true;
-    },
+    ...mapActions(["select_item"]),
     select_all() {
       if (this.all_rows_selected) {
         //all select

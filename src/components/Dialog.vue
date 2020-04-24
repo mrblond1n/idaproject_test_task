@@ -21,12 +21,9 @@ export default {
   },
   methods: {
     close() {
-      console.log("close??");
-
       this.$emit("close_dialog");
     },
     remove() {
-      console.log("remove ??");
       this.$emit("remove_item");
     }
   },
