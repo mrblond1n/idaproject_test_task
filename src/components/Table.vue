@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="table__control">
+      <div class="table__control-item">
+        <p>Sorting by:</p>
+        <template v-for="item in headers">
+          <button class="table__sort-item" :key="item.name">{{item.text}}</button>
+        </template>
+      </div>
+      <div class="table__control-item">
+        <app-remove />
+        <select-button />pagination
+        <select-button />
+      </div>
+    </div>
     <table>
       <thead>
         <tr>
@@ -43,11 +56,15 @@
 import { mapGetters, mapActions } from "vuex";
 import row from "./Row";
 // import appDialog from "./Dialog";
+import selectButton from "./Select";
 import appCheckbox from "./Checkbox";
+import appRemove from "./Remove";
 export default {
   components: {
     row,
     // appDialog,
+    selectButton,
+    appRemove,
     appCheckbox
   },
   data() {
@@ -139,11 +156,41 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 table {
   border-collapse: collapse;
 }
 thead th {
   padding: 1rem;
+}
+
+.card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px 0 grey;
+  border-radius: 4px;
+  padding: 1rem;
+  right: 50px;
+  white-space: nowrap;
+  font-size: 14px;
+  background: #fff;
+  z-index: 1;
+}
+.card__action {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.table__control {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table__control-item {
+  display: flex;
 }
 </style>
