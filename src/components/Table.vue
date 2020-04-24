@@ -9,7 +9,8 @@
       </div>
       <div class="table__control-item">
         <app-remove />
-        <select-button />pagination
+        <select-button />
+        <app-pagination />
         <select-button />
       </div>
     </div>
@@ -28,8 +29,8 @@
       </tbody>
     </table>
     <!-- НА УДАЛЕНИЕ  -->
-    <!-- selected items
-    <div
+    <!-- selected items -->
+    <!-- <div
       v-for="item in selected_items.rows"
       :key="item.id"
       style="margin-top: 20px"
@@ -41,16 +42,18 @@
 import { mapGetters, mapActions } from "vuex";
 import row from "./Row";
 // import appDialog from "./Dialog";
-import selectButton from "./Select";
-import appCheckbox from "./Checkbox";
-import appRemove from "./Remove";
+import selectButton from "@/components/Select";
+import appCheckbox from "@/components/Checkbox";
+import appRemove from "@/components/Remove";
+import appPagination from "@/components/Pagination";
 export default {
   components: {
     row,
     // appDialog,
     selectButton,
     appRemove,
-    appCheckbox
+    appCheckbox,
+    appPagination
   },
   data() {
     return {
