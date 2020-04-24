@@ -1,6 +1,8 @@
 <template>
   <tr @click="select_row">
-    <checkbox :is_checked="row_is_select" />
+    <td>
+      <checkbox :is_checked="selected_items.includes(item)" />
+    </td>
     <td v-for="header in headers" :key="header.name">{{item[header.name]}}</td>
     <td>
       <button class="btn" @click.stop="dialog = !dialog">delete</button>
@@ -14,7 +16,7 @@
 <script>
 import checkbox from "./Checkbox";
 import appDialog from "./Dialog";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     checkbox,
@@ -32,14 +34,15 @@ export default {
   },
   data() {
     return {
-      dialog: false,
-      row_is_select: false
+      dialog: false
     };
+  },
+  computed: {
+    ...mapGetters(["selected_items"])
   },
   methods: {
     ...mapActions(["remove_item", "select_item"]),
     select_row() {
-      this.row_is_select = !this.row_is_select;
       this.select_item(Array(this.item));
     },
     remove(item) {

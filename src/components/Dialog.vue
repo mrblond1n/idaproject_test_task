@@ -1,5 +1,5 @@
 <template>
-  <div class="card" ref="dialog">
+  <div class="card" ref="dialog" @click.stop="() => {}">
     <div class="card__text">
       Are you sure you want to
       <span>{{msg}}</span>
