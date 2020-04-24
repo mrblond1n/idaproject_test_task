@@ -11,7 +11,7 @@
         <app-remove />
         <select-button method="rows" />
         <app-pagination />
-        <select-button />
+        <select-button method="cols" :headers="headers" />
       </div>
     </div>
     <table>
@@ -20,7 +20,7 @@
           <th>
             <app-checkbox :select="select_all" :is_checked="all_rows_selected" />
           </th>
-          <th v-for="item in headers" :key="item.name">{{item.text}}</th>
+          <th v-for="item in selected_items.cols" :key="item.name">{{item.text}}</th>
           <th></th>
         </tr>
       </thead>
@@ -131,6 +131,9 @@ export default {
         this.select_item({ rows: this.current_data });
       }
     }
+  },
+  mounted() {
+    this.select_item({ cols: this.headers });
   }
 };
 </script>

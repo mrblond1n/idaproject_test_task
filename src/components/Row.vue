@@ -3,7 +3,7 @@
     <td>
       <checkbox :is_checked="selected_items.rows.includes(item)" />
     </td>
-    <td v-for="header in headers" :key="header.name">{{item[header.name]}}</td>
+    <td v-for="header in selected_items.cols" :key="header.name">{{item[header.name]}}</td>
     <td>
       <button class="btn" @click.stop="dialog = !dialog">delete</button>
       <template v-if="dialog">
