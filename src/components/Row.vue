@@ -1,5 +1,5 @@
 <template>
-  <tr @click="select_row">
+  <tr @click="select_row" :class="selected_items.rows.includes(item) && 'selected'">
     <td>
       <checkbox :is_checked="selected_items.rows.includes(item)" />
     </td>

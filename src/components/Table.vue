@@ -28,20 +28,12 @@
         <row v-for="item in current_data" :item="item" :key="item.id" :headers="headers" />
       </tbody>
     </table>
-    <!-- НА УДАЛЕНИЕ  -->
-    <!-- selected items -->
-    <!-- <div
-      v-for="item in selected_items.rows"
-      :key="item.id"
-      style="margin-top: 20px"
-    >------- {{item.product}}</div>-->
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import row from "./Row";
-// import appDialog from "./Dialog";
 import selectButton from "@/components/Select";
 import appCheckbox from "@/components/Checkbox";
 import appRemove from "@/components/Remove";
@@ -49,7 +41,6 @@ import appPagination from "@/components/Pagination";
 export default {
   components: {
     row,
-    // appDialog,
     selectButton,
     appRemove,
     appCheckbox,
@@ -141,9 +132,48 @@ export default {
 <style lang="scss">
 table {
   border-collapse: collapse;
+  position: relative;
+  width: 100%;
 }
 thead th {
   padding: 1rem;
+}
+
+tr {
+  position: relative;
+  &:nth-child(odd) {
+    background: $odd-row-color;
+  }
+  &:nth-child(even) {
+    background: $even-row-color;
+  }
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  transition: 0.2s;
+  background: $select-row-color;
+  td:nth-child(2) {
+    font-weight: bold;
+  }
+}
+
+td,
+th {
+  padding: 1rem;
+  max-width: 10rem;
+}
+
+tr.selected td:nth-child(2) {
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+tr {
+  td:first-child,
+  th:first-child {
+    width: 1%;
+  }
 }
 
 .card {
