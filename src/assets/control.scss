@@ -14,4 +14,11 @@
 	& > div {
 		position: relative;
 	}
+	p {
+		font-weight: bold;
+		color: #3d374a;
+	}
+	&:last-child p {
+		margin: 0 5px;
+	}
 }

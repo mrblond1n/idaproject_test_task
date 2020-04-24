@@ -3,7 +3,8 @@
     <button class="btn" :disabled="decrease_disable" @click="set_pagination(-1)">
       <span class="mdi mdi-16px mdi-chevron-left"></span>
     </button>
-    <p>{{`${(rows_per_page * pagination) + 1} - ${rows_per_page * (pagination + 1)} of ${table_data.length}`}}</p>
+    <p>{{`${(rows_per_page * pagination) + 1}-${rows_per_page * (pagination + 1)} `}}</p>of
+    <p>{{` ${table_data.length}`}}</p>
     <button class="btn" :disabled="increase_disable" @click="set_pagination(1)">
       <span class="mdi mdi-16px mdi-chevron-right"></span>
     </button>
