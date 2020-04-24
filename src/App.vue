@@ -1,10 +1,15 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <app-table></app-table>
+  </div>
 </template>
 
 <script>
+import appTable from "@/components/Table";
 export default {
-  components: {}
+  components: {
+    appTable
+  }
 };
 </script>
 
@@ -16,5 +21,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
