@@ -1,13 +1,15 @@
 <template>
-  <div class="notify" :style="theme">
-    <div class="notify__text">{{notify.text}}</div>
-    <div class="button" @click="close">
-      <svg viewBox="0 0 24 24">
-        <path
-          fill="currentColor"
-          d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
-        />
-      </svg>
+  <div class="notify__wrapper">
+    <div class="notify" :style="theme">
+      <div class="notify__text">{{notify.text}}</div>
+      <div class="button" @click="close">
+        <svg viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
+          />
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -53,15 +55,19 @@ export default {
 </script>
 
 <style lang="scss">
-.notify {
+.notify__wrapper {
   z-index: 9999;
   position: fixed;
   bottom: 70px;
-  margin: 0 auto;
   left: 0;
   right: 0;
-  max-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: 0.4s;
+}
+
+.notify {
   border-radius: 4px;
   display: flex;
   align-items: center;

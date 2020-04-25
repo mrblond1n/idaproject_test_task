@@ -18,9 +18,14 @@
           :key="item.id"
           :headers="headers"
           :sort_item="sort_item"
+          :current_data="table_data"
+          @remove_item="remove"
         />
       </tbody>
     </table>
+    <transition name="slide">
+      <app-notify v-if="notify" :notify="notify" @close_notify="notify = null" />
+    </transition>
   </div>
   <div v-else class="container" style="height: 80vh">
     <button class="btn btn--active" @click="get_data" :disabled="loading">Loading table data</button>
@@ -103,7 +108,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["select_item", "loading_data"]),
+    ...mapActions(["select_item", "loading_data", "remove_item"]),
     get_data() {
       this.notify = null;
       this.loading = true;
@@ -114,6 +119,21 @@ export default {
             text: "Oops, server error. Try again later!"
           };
         this.loading = false;
+      });
+    },
+    remove(item) {
+      this.remove_item(item).then(() => {
+        if (this.table_data.includes(item)) {
+          this.notify = {
+            text: "An error occurred while deleting the item",
+            color: "error"
+          };
+        } else {
+          this.notify = {
+            text: "Item successfully deleted",
+            color: "success"
+          };
+        }
       });
     }
   },
@@ -128,6 +148,7 @@ export default {
   border-collapse: collapse;
   position: relative;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .table__row {
