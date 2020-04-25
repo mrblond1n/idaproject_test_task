@@ -33,6 +33,9 @@ export default {
   font-weight: normal;
   font-style: normal;
 }
+html {
+  font-size: 14px;
+}
 
 body {
   font-family: $font;
@@ -75,7 +78,6 @@ a {
 #app {
   display: grid;
   min-height: 100vh;
-  font-size: 14px;
   grid-template-areas: ". header ." ". main ." "footer footer footer";
   grid-template-rows: auto auto auto;
   grid-template-columns: 5% auto 5%;

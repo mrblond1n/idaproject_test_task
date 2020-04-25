@@ -49,6 +49,8 @@ export default {
   align-items: center;
   &:first-child .btn {
     border-color: transparent;
+    margin: 0;
+    margin-left: 1rem;
   }
   & > div {
     position: relative;
