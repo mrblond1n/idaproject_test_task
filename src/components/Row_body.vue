@@ -86,19 +86,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-tr {
-  position: relative;
-}
-td {
-  position: relative;
-  padding: 1rem;
-}
-
 .btn {
   border-color: transparent;
   display: flex;
+  opacity: 0;
   svg {
     margin-right: 5px;
+  }
+}
+.table__row:hover {
+  .btn {
+    opacity: 1;
   }
 }
 </style>

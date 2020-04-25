@@ -1,19 +1,6 @@
 <template>
   <div v-if="table_data.length" class="container">
-    <div class="panel">
-      <div class="panel__item">
-        <p>Sorting by:</p>
-        <template v-for="item in headers">
-          <sort-button :key="`sort_${item.name}`" :item="item" />
-        </template>
-      </div>
-      <div class="panel__item">
-        <app-remove />
-        <select-button method="rows" />
-        <app-pagination />
-        <select-button method="cols" :headers="headers" />
-      </div>
-    </div>
+    <app-row-panel :headers="headers" />
     <table class="table">
       <thead class="table__head">
         <app-row-header
@@ -43,20 +30,14 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import appRowBody from "./Row";
-import selectButton from "@/components/Select";
-import appRemove from "@/components/Remove";
-import appPagination from "@/components/Pagination";
-import sortButton from "./Sort_button";
+import appRowPanel from "./Row_panel";
 import appRowHeader from "./Row_header";
+import appRowBody from "./Row_body";
 import appNotify from "./Notify";
 export default {
   components: {
+    appRowPanel,
     appRowBody,
-    selectButton,
-    appRemove,
-    appPagination,
-    sortButton,
     appRowHeader,
     appNotify
   },
@@ -88,8 +69,6 @@ export default {
           name: "iron"
         }
       ],
-      dialog: false,
-      sort_type: 0,
       loading: false,
       notify: null
     };
@@ -119,31 +98,14 @@ export default {
             return this.table_data;
         }
       });
-    },
-    all_rows_selected() {
-      let count = 0;
-      this.current_data.forEach(item => {
-        this.selected_items.rows.includes(item) ? (count += 1) : (count -= 1);
-      });
-      return count === this.rows_per_page;
     }
   },
   methods: {
-    ...mapActions(["select_item", "set_sort_item", "loading_data"]),
-    select_all() {
-      if (this.all_rows_selected) {
-        //all select
-        this.current_data.forEach(el => this.select_item({ rows: Array(el) }));
-      } else {
-        // all selected reset!
-        this.select_item({ rows: this.current_data });
-      }
-    },
+    ...mapActions(["select_item", "loading_data"]),
     get_data() {
       this.loading = true;
       this.loading_data().then(() => {
         console.log(this.table_data.length);
-
         this.loading = false;
       });
     }
@@ -203,39 +165,6 @@ export default {
 .table__row.selected .table__item:nth-child(2) {
   font-weight: bold;
   opacity: 0.8;
-}
-
-.panel {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.panel__item {
-  display: flex;
-  align-items: center;
-  &:first-child .btn {
-    border-color: transparent;
-  }
-  & > div {
-    position: relative;
-  }
-  p {
-    font-weight: bold;
-    color: #3d374a;
-  }
-  &:last-child p {
-    margin: 0 5px;
-  }
-}
-
-.panel {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  padding: 20px 0;
 }
 
 .btn {
