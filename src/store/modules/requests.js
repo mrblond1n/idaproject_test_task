@@ -23,6 +23,7 @@ export default {
       items.includes(item) ? items.splice(index, 1) : items.push(item);
     },
     select_items(state, { type, items }) {
+      if (type === 'cols') state.selected_items.cols.splice(0);
       let items_slctd = state.selected_items[type];
       items.forEach(item => {
         let index = items_slctd.indexOf(item);
