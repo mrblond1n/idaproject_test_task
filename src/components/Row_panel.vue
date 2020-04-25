@@ -3,7 +3,7 @@
     <div class="panel__item">
       <p>Sorting by:</p>
       <template v-for="item in headers">
-        <sort-button :key="`sort_${item.name}`" :item="item" />
+        <sort-button :key="`sort_${item.name}`" :item="item" @select="select" />
       </template>
     </div>
     <div class="panel__item">
@@ -20,6 +20,8 @@ import selectButton from "@/components/Select";
 import appRemove from "@/components/Remove";
 import appPagination from "@/components/Pagination";
 import sortButton from "./Sort_button";
+
+import { mapActions } from "vuex";
 export default {
   components: {
     selectButton,
@@ -32,6 +34,15 @@ export default {
       type: Array,
       default: () => {}
     }
+  },
+  methods: {
+    ...mapActions(["set_sort_item"]),
+    select(item) {
+      this.set_sort_item({ item, type: 0 });
+    }
+  },
+  mounted() {
+    this.select({ name: "product", text: "Product (100g serving)" });
   }
 };
 </script>

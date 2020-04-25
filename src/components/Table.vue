@@ -12,16 +12,16 @@
         />
       </thead>
       <tbody class="table__body">
-        <app-row-body
-          v-for="item in current_data"
-          :item="item"
-          :key="item.id"
-          :headers="headers"
-          :sort_item="sort_item"
-          :current_data="table_data"
-          @remove_item="remove"
-          :loading="loading"
-        />
+        <template v-for="item in current_data">
+          <app-row-body
+            :item="item"
+            :key="item.id"
+            :headers="headers"
+            :sort_item="sort_item"
+            @remove_item="remove"
+            :loading="loading"
+          />
+        </template>
       </tbody>
     </table>
     <transition name="slide">

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -13,15 +13,14 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["headers", "sort_item"]),
+    ...mapGetters(["sort_item"]),
     is_active() {
-      return this.sort_item.item === this.item;
+      return this.sort_item.item.name === this.item.name;
     }
   },
   methods: {
-    ...mapActions(["set_sort_item"]),
     select(item) {
-      this.set_sort_item({ item, type: 0 });
+      this.$emit("select", item);
     }
   }
 };

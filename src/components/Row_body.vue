@@ -15,7 +15,6 @@
         v-if="header.name != sort_item.item.name"
       >{{item[header.name]}}</td>
     </template>
-
     <td class="table__item">
       <button class="btn" @click.stop="dialog = !dialog">
         <svg width="14" height="16" viewBox="0 0 14 16">

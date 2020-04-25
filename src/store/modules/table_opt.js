@@ -2,7 +2,7 @@ export default {
   state: {
     rows_per_page: 10,
     sort_item: {
-      item: '',
+      item: {},
       type: 0
     },
     pagination: 0
