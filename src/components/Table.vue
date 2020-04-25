@@ -20,6 +20,7 @@
           :sort_item="sort_item"
           :current_data="table_data"
           @remove_item="remove"
+          :loading="loading"
         />
       </tbody>
     </table>
@@ -123,6 +124,7 @@ export default {
     },
     remove(item) {
       this.notify = null;
+      this.loading = true;
       this.remove_item(item).then(() => {
         if (this.table_data.includes(item)) {
           this.notify = {
@@ -135,6 +137,7 @@ export default {
             color: "success"
           };
         }
+        this.loading = false;
       });
     }
   },

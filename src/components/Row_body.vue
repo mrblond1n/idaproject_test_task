@@ -30,7 +30,11 @@
         delete
       </button>
       <template v-if="dialog">
-        <app-dialog @close_dialog="() => {dialog = false}" @remove_item="remove(item)" />
+        <app-dialog
+          :loading="loading"
+          @close_dialog="() => {dialog = false}"
+          @remove_item="remove(item)"
+        />
       </template>
     </td>
   </tr>
@@ -57,6 +61,10 @@ export default {
     sort_item: {
       type: Object,
       default: () => {}
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

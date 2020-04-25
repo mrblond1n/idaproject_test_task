@@ -6,7 +6,7 @@
     </div>
     <div class="card__action">
       <button class="btn" @click.stop="close">Cancel</button>
-      <button class="btn btn--active" @click.stop="remove">Confirm</button>
+      <button class="btn btn--active" :disabled="loading" @click.stop="remove">Confirm</button>
     </div>
   </div>
 </template>
@@ -17,6 +17,10 @@ export default {
     msg: {
       type: String,
       default: "delete item?"
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

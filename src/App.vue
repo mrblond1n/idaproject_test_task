@@ -78,6 +78,7 @@ a {
   font-size: 14px;
   grid-template-areas: ". header ." ". main ." "footer footer footer";
   grid-template-rows: auto auto auto;
+  grid-template-columns: 5% auto 5%;
   align-items: center;
 }
 
