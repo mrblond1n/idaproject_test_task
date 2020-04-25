@@ -35,17 +35,12 @@ export default {
     async loading_data({ commit }) {
       await getProducts().then(response => {
         commit('loading_data', response);
-        console.log('data loaded');
-      }).catch(e => {
-        console.log(e.error || e);
-      });
+      }).catch(() => { });
     },
     async remove_item({ commit }, payload) {
       await deleteProducts().then(() => {
         commit('remove_item', payload);
-      }).catch(e => {
-        console.log(e.error || e);
-      });
+      }).catch(() => { });
     },
     select_item({ commit }, payload) {
       let type = Object.keys(payload)[0];

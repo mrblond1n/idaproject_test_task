@@ -11,11 +11,6 @@ export default {
     set_rows_show(state, payload) {
       state.rows_per_page = payload
     },
-    set_columns_show(state, payload) {
-      state.headers.forEach(item => {
-        console.log(payload.indexOf(item));
-      })
-    },
     set_sort_item(state, payload) {
       state.sort_item = payload
     },
@@ -27,9 +22,6 @@ export default {
     set_rows_show({ commit }, payload) {
       commit('set_rows_show', payload)
     },
-    set_columns_show({ commit }, payload) {
-      commit('set_columns_show', payload)
-    },
     set_sort_item({ commit }, payload) {
       commit('set_sort_item', payload)
     },
@@ -39,7 +31,6 @@ export default {
   },
   getters: {
     rows_per_page: s => s.rows_per_page,
-    headers: s => s.headers,
     sort_item: s => s.sort_item,
     pagination: s => s.pagination
   }
