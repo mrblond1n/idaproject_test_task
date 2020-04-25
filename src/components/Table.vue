@@ -4,7 +4,7 @@
       <div class="panel__item">
         <p>Sorting by:</p>
         <template v-for="item in headers">
-          <sort-button :key="item.name" :item="item" />
+          <sort-button :key="`sort_${item.name}`" :item="item" />
         </template>
       </div>
       <div class="panel__item">
@@ -16,23 +16,16 @@
     </div>
     <table class="table">
       <thead class="table__head">
-        <tr class="table__row">
-          <th class="table__item">
-            <app-checkbox :select="select_all" :is_checked="all_rows_selected" />
-          </th>
-          <sort-item v-if="sort_item.item" :sort_item="sort_item" />
-          <template v-for="item in selected_items.cols">
-            <th
-              class="table__item"
-              v-if="sort_item.item.name != item.name"
-              :key="item.name"
-            >{{item.text}}</th>
-          </template>
-          <th class="table__item"></th>
-        </tr>
+        <app-row-header
+          :sort_item="sort_item"
+          :selected_items="selected_items"
+          :rows_per_page="rows_per_page"
+          :current_data="current_data"
+          :select_item="select_item"
+        />
       </thead>
       <tbody class="table__body">
-        <row
+        <app-row-body
           v-for="item in current_data"
           :item="item"
           :key="item.id"
@@ -44,27 +37,28 @@
   </div>
   <div v-else class="container" style="height: 80vh">
     <button class="btn btn--active" @click="get_data" :disabled="loading">Loading table data</button>
+    <app-notify :notify="notify" @close_notify="notify = null" />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import row from "./Row";
+import appRowBody from "./Row";
 import selectButton from "@/components/Select";
-import appCheckbox from "@/components/Checkbox";
 import appRemove from "@/components/Remove";
 import appPagination from "@/components/Pagination";
 import sortButton from "./Sort_button";
-import sortItem from "./Sort_item";
+import appRowHeader from "./Row_header";
+import appNotify from "./Notify";
 export default {
   components: {
-    row,
+    appRowBody,
     selectButton,
     appRemove,
-    appCheckbox,
     appPagination,
     sortButton,
-    sortItem
+    appRowHeader,
+    appNotify
   },
   data() {
     return {
@@ -96,7 +90,8 @@ export default {
       ],
       dialog: false,
       sort_type: 0,
-      loading: false
+      loading: false,
+      notify: null
     };
   },
   computed: {
@@ -147,6 +142,8 @@ export default {
     get_data() {
       this.loading = true;
       this.loading_data().then(() => {
+        console.log(this.table_data.length);
+
         this.loading = false;
       });
     }

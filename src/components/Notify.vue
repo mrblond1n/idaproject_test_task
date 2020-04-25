@@ -25,12 +25,9 @@ export default {
     notify: {
       type: Object,
       default: () => {}
-     }
+    }
   },
   computed: {
-    notify() {
-      return this.$store.getters.notify;
-    },
     theme() {
       switch (this.notify.color) {
         case "error":
@@ -44,7 +41,7 @@ export default {
   },
   methods: {
     close() {
-      this.$store.dispatch("notify", null);
+      this.$emit("close_notify");
     }
   }
 };

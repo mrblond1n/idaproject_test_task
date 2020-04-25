@@ -37,10 +37,8 @@ export default {
       await getProducts().then(response => {
         commit('loading_data', response);
         console.log('data loaded');
-
       }).catch(e => {
         console.log(e.error || e);
-
       });
     },
     async remove_item({ commit }, payload) {
