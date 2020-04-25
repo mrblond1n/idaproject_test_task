@@ -84,6 +84,7 @@ export default {
 .btn {
   border-color: transparent;
   display: flex;
+  align-items: center;
   opacity: 0;
   svg {
     margin-right: 5px;

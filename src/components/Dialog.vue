@@ -25,12 +25,16 @@ export default {
     },
     remove() {
       this.$emit("remove_item");
+    },
+    listener(e) {
+      !e.target.closest(".card") && this.$emit("close_dialog");
     }
   },
   mounted() {
-    document.addEventListener("click", e => {
-      !e.target.closest(".card") && this.$emit("close_dialog");
-    });
+    document.addEventListener("click", this.listener);
+  },
+  destroyed() {
+    document.removeEventListener("click", this.listener);
   }
 };
 </script>

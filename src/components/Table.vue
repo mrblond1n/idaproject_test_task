@@ -122,6 +122,7 @@ export default {
       });
     },
     remove(item) {
+      this.notify = null;
       this.remove_item(item).then(() => {
         if (this.table_data.includes(item)) {
           this.notify = {

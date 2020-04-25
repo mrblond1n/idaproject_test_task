@@ -43,12 +43,16 @@ export default {
         return this.headers.forEach(l => this.select_item({ cols: Array(l) }));
       }
       this.select_item({ cols: this.headers });
+    },
+    listener(e) {
+      !e.target.closest(".options") && this.$emit("close_menu");
     }
   },
   mounted() {
-    document.addEventListener("click", e => {
-      !e.target.closest(".options") && this.$emit("close_menu");
-    });
+    document.addEventListener("click", this.listener);
+  },
+  destroyed() {
+    document.removeEventListener("click", this.listener);
   }
 };
 </script>
