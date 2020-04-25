@@ -3,11 +3,10 @@ import { getProducts, deleteProducts } from '@/api/request'
 export default {
   state: {
     table_data: [],
-    // selected_items: [],
     selected_items: {
       rows: [],
       cols: []
-    },
+    }
   },
   mutations: {
     loading_data(state, payload) {
@@ -24,10 +23,10 @@ export default {
       items.includes(item) ? items.splice(index, 1) : items.push(item);
     },
     select_items(state, { type, items }) {
-      let items_slc = state.selected_items[type];
+      let items_slctd = state.selected_items[type];
       items.forEach(item => {
-        let index = items_slc.indexOf(item);
-        items_slc.includes(item) ? items_slc[index] = item : items_slc.push(item);
+        let index = items_slctd.indexOf(item);
+        items_slctd.includes(item) ? items_slctd[index] = item : items_slctd.push(item);
       })
 
     }
@@ -51,7 +50,6 @@ export default {
     select_item({ commit }, payload) {
       let type = Object.keys(payload)[0];
       let items = payload[type];
-
       if (items.length > 1) return commit('select_items', { type, items });
       items.forEach(item => {
         commit('select_item', { item, type })

@@ -24,7 +24,9 @@
   </div>
   <div v-else class="container" style="height: 80vh">
     <button class="btn btn--active" @click="get_data" :disabled="loading">Loading table data</button>
-    <app-notify :notify="notify" @close_notify="notify = null" />
+    <transition name="slide">
+      <app-notify v-if="notify" :notify="notify" @close_notify="notify = null" />
+    </transition>
   </div>
 </template>
 
@@ -103,9 +105,14 @@ export default {
   methods: {
     ...mapActions(["select_item", "loading_data"]),
     get_data() {
+      this.notify = null;
       this.loading = true;
       this.loading_data().then(() => {
-        console.log(this.table_data.length);
+        if (!this.table_data.length)
+          this.notify = {
+            color: "error",
+            text: "Oops, server error. Try again later!"
+          };
         this.loading = false;
       });
     }
