@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @font-face {
   font-family: "Source Sans Pro";
   src: url("~@/assets/fonts/SourceSansPro-Regular.woff2") format("woff2"),
@@ -34,10 +34,51 @@ export default {
   font-style: normal;
 }
 
+body {
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $text-color;
+  background: $bg-color;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border-style: none;
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-color: white;
+  }
+}
+
 #app {
   display: grid;
+  min-height: 100vh;
   font-size: 14px;
   grid-template-areas: ". header ." ". main ." "footer footer footer";
+  grid-template-rows: auto auto auto;
+  align-items: center;
 }
 
 header {
@@ -55,5 +96,12 @@ footer {
   background: rgba(0, 0, 0, 0.6);
   color: white;
   margin-top: 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

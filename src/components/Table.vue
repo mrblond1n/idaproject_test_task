@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="table_data.length" class="container">
     <div class="panel">
       <div class="panel__item">
         <p>Sorting by:</p>
@@ -41,6 +41,9 @@
         />
       </tbody>
     </table>
+  </div>
+  <div v-else class="container" style="height: 80vh">
+    <button class="btn btn--active" @click="get_data" :disabled="loading">Loading table data</button>
   </div>
 </template>
 
@@ -92,7 +95,8 @@ export default {
         }
       ],
       dialog: false,
-      sort_type: 0
+      sort_type: 0,
+      loading: false
     };
   },
   computed: {
@@ -130,7 +134,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["select_item", "set_sort_item"]),
+    ...mapActions(["select_item", "set_sort_item", "loading_data"]),
     select_all() {
       if (this.all_rows_selected) {
         //all select
@@ -139,6 +143,12 @@ export default {
         // all selected reset!
         this.select_item({ rows: this.current_data });
       }
+    },
+    get_data() {
+      this.loading = true;
+      this.loading_data().then(() => {
+        this.loading = false;
+      });
     }
   },
   mounted() {
@@ -148,4 +158,129 @@ export default {
 </script>
 
 <style lang="scss">
+.table {
+  border-collapse: collapse;
+  position: relative;
+  width: 100%;
+}
+
+.table__row {
+  position: relative;
+  &:nth-child(odd) {
+    background: $odd-row-color;
+  }
+  &:nth-child(even) {
+    background: $even-row-color;
+  }
+}
+
+.table__item {
+  padding: 1rem;
+  max-width: 10rem;
+}
+
+.table__item {
+  text-align: left;
+}
+.table__item.sort {
+  cursor: pointer;
+}
+
+.table__item:first-child,
+.table__item:last-child {
+  width: 1%;
+}
+.table__item:last-child {
+  text-align: right;
+}
+
+.table__body .table__row:hover {
+  cursor: pointer;
+  transition: 0.2s;
+  background: $select-row-color;
+  .table__item:nth-child(2) {
+    font-weight: bold;
+  }
+}
+
+.table__row.selected .table__item:nth-child(2) {
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.panel__item {
+  display: flex;
+  align-items: center;
+  &:first-child .btn {
+    border-color: transparent;
+  }
+  & > div {
+    position: relative;
+  }
+  p {
+    font-weight: bold;
+    color: #3d374a;
+  }
+  &:last-child p {
+    margin: 0 5px;
+  }
+}
+
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.btn {
+  padding: 5px 10px;
+  transition: 0.4s;
+  border: 1px solid $border-active;
+  color: $active-color;
+  border-radius: 2px;
+  height: 32px;
+  margin: 0 10px;
+  cursor: pointer;
+  span {
+    color: $active-color;
+  }
+}
+
+.btn:disabled,
+.btn--active:disabled {
+  background: transparent;
+  cursor: default;
+  border-color: $disable-color;
+  color: $disable-color;
+  span {
+    color: $disable-color;
+  }
+}
+
+.btn--active {
+  background: $active;
+  color: #fff;
+  span {
+    color: #fff;
+  }
+}
+
+.select {
+  .btn {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+}
 </style>
