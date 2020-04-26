@@ -69,4 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.table__item {
+  white-space: nowrap;
+}
 </style>

@@ -58,6 +58,7 @@ export default {
 .panel__item {
   display: flex;
   align-items: center;
+  white-space: nowrap;
   &:first-child .btn {
     border-color: transparent;
     margin: 0;
@@ -81,5 +82,11 @@ export default {
   justify-content: space-between;
   width: 100%;
   padding: 20px 0;
+  @media screen and (max-width: 1000px) {
+    justify-content: center;
+    .panel__item {
+      margin: 10px 0;
+    }
+  }
 }
 </style>
